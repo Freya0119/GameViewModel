@@ -49,11 +49,15 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         //Fifteenth
-        Log.d("GameFragment", "Word: ${viewModel.currentScrambledWord} " + "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
+        Log.d(
+            "GameFragment",
+            "Word: ${viewModel.currentScrambledWord} " + "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}"
+        )
 
         // Inflate the layout XML file and return a binding object instance
         binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
         Log.d("GameFragment", "GameFragment created/re-created!")
+
         return binding.root
     }
 
@@ -70,12 +74,10 @@ class GameFragment : Fragment() {
 //            R.string.word_count, 0, MAX_NO_OF_WORDS
 //        )
 
-        //Seventeenth
-        viewModel.currentScrambledWord.observe(viewLifecycleOwner) { newWord -> binding.textViewUnscrambledWord.text = newWord }
-        viewModel.score.observe(viewLifecycleOwner) { newScore -> binding.score.text = getString(R.string.score, newScore) }
-        viewModel.currentWordCount.observe(viewLifecycleOwner) { newCount ->
-            binding.wordCount.text = getString(R.string.word_count, newCount, MAX_NO_OF_WORDS)
-        }
+        //Eighteenth
+        binding.gameViewModel = viewModel
+        binding.maxNoOfWords = MAX_NO_OF_WORDS
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     /*
